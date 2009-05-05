@@ -1,74 +1,24 @@
-$Id: README 12379 2009-04-25 11:28:17Z lem9 $
+phpmyadmin_GitHubed (yes the single 'b' is on purpose)
+A Git fork of the latest stable version of phpmyadmin (3.1.4) to move development effort below the "pita-threshold"
 
-phpMyAdmin - Readme
-===================
+The problem:
+As a programmer when I find a bug or usability problem with some open source software I'm using, I find it's often quicker and easier to fix the problem myself than it is to submit a bug to get it fixed. There is several reasons for this:
+- because you're the one experiencing the issue your motivation to have it fixed is higher than it would be for a developer on that open source project who is not experiencing the issue. This makes you more likely to work on it straight away, however if you were to submit a bug you will more than likely have an ordeal just convincing the developer that the problem exists, let alone that they should work on it any time soon (or ever!).
+- the process of submitting the bug requires you to investigate the problem anyway, so why not just fix it while you're there.
+- filling out bug form alone usually takes way too much time and you've got to get an account where ever that team has decided to host their bug tracker.
+- going though the bug reporting process often requires you to be diplomatic as developers generally don't like being told there is a problem with their project.
+- if no developers are around to address your issue or it's not of interest to the ones that are around, then you may find yourself waiting for months or even years before there is even a reply (if ever). So if it's something you need fixed urgently, you have effectively wasted time filling out the bug report.
+- you are at the mercy of the developers, they may decide that you're bug is invalid and then close the bug, not even giving you a chance to respond. This happened to me once happened to me on the PHP bug tracker, I believed the bug was still valid and that the person who closed it had misunderstood my report, but I was informed by the bug system that I could not make a further comment as the issue was closed (they may have changed the system now, I'm not sure, but I've seen happen on other bug trackers).
+- chances are even if somebody fixes it for you, they will misunderstand the request in some way or end up doing a half ass job, which will no doubt end up with you having to lodge another bug repeating the process.
 
-  A set of PHP-scripts to manage MySQL over the web.
+The solution:
+Git is a distributed version control system and GitHub allows anybody to fork anything, make fixes, publish it for everybody to use and then tell the original developers about your changes. Not just open source but also OPEN DEVELOPMENT, no permission or hassle necessary! The original devs can then work out the damn politics and complicated issue tracking system. =D
 
-  Version 3.1.4
-  -------------
-  http://www.phpmyadmin.net/
+It is for this reason that I think every open source project should be using an open development system, such as that provided by Git and GitHub. If you don't, you're just missing out one help from the majority of developers who just can't be bothered to jump though all your hoops. (see http://wiki.dandascalescu.com/essays/pita-threshold for more info).
 
-    Copyright (C) 1998-2000 Tobias Ratschiller <tobias_at_ratschiller.com>
-    Copyright (C) 2001-2007 Marc Delisle <Marc.Delisle_at_cegepsherbrooke.qc.ca>
-                            Olivier Müller <om_at_omnis.ch>
-                            Robin Johnson <robbat2_at_users.sourceforge.net>
-                            Alexander M. Turek <me_at_derrabus.de>
-                            Michal Čihař <michal_at_cihar.com>
-                            Garvin Hicking <me_at_supergarv.de>
-                            Michael Keck <mkkeck_at_users.sourceforge.net>
-                            Sebastian Mendel <cybot_tm_at_users.sourceforge.net>
-                            [check Documentation.txt/.html file for more details]
+Get to phpmyadmin already!:
+OK so phpmyadmin is used quite a lot across the world, but like the majority of open source projects out there it's open source but closed development. It's way too hard to get your changes from your hard drive to the main project, so you don't bother and you end up just keeping those changes to yourself, which is not the point of open source. I personally believe that this is quite a significant problem for phpmyadmin, because while the bulk of it's code seems pretty good, I hate it and think as a whole it's god damn awful and I'm sure I'm not the only one who thinks this. This however really just comes down to very small issues which affect me every time I use the app, tiny usability issues or bugs that really get on my nerves over time. There is so many of these issues and they are each so small and considered by some to be too subjective (how convenient), unimportant or falling into the "works for me" category. These are the sort of bugs/issues that people fix for themselves and then never submit. It would make phpmyadmin so much better if they were fixed publicly, but with closed development they probably never will be.
 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License version 2,
-    as published by the Free Software Foundation.
+So that's what I'm trying to do here, I'm initiating open development of phpmyadmin to the masses. I in no way wish to take over the phpmyadmin project or think that I have the time to fix more than a handful of the usability issues I spoke of (generically). Instead I'm doing in the hope that it will give everybody like me an opportunity to commit their fixes to the project in a very easy fashion. At the same time I hope it demonstrates to the phpmyadmin project (and other open source teams) the advantages of development though an open system such as Git and GitHub, over what they are currently doing.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-  Requirements:
-    php 5.2 or later
-    MySQL 5.0 or later
-    a web-browser (doh!)
-
-  Summary:
-    phpMyAdmin is intended to handle the administration of MySQL over the web.
-    For a summary of features, please see the Documentation.txt/.html file.
-
-  Download:
-    You can get the newest version at http://www.phpmyadmin.net/.
-
-  Credits:
-    Please see the Documentation.txt/.html file.
-
-  Installation:
-    Please see the Documentation.txt/.html file.
-
-  ChangeLog:
-    Now in ChangeLog
-
-  Documentation:
-    Basic documentation available in Documentation.txt/.html
-
-  Support:
-    See reference about support forums under http://www.phpmyadmin.net/
-
-
-    Enjoy!
-        The phpMyAdmin Devel team
-
-
-  PS: Please, don't send us emails with question like "How do I compile
-      PHP with MySQL-support". We just don't have the time to be your
-      free helpdesk.
-      Please send your questions to the appropriate mailinglists / forums.
-      Before contacting us, please read the Documentation.html (esp. the
-      FAQ part).
-
+So in conclusion... PLEASE FORK ME
