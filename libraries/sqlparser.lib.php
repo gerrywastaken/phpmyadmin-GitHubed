@@ -160,7 +160,7 @@ if (! defined('PMA_MINIMUM_COMMON')) {
         $debugstr .= 'SQL: ' . htmlspecialchars($sql);
 
         $encodedstr     = $debugstr;
-        if (@function_exists('gzcompress')) {
+        if (function_exists('gzcompress')) {
             $encodedstr = gzcompress($debugstr, 9);
         }
         $encodedstr     = preg_replace("/(\015\012)|(\015)|(\012)/", '<br />' . "\n", chunk_split(base64_encode($encodedstr)));

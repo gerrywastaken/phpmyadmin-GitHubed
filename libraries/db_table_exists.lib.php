@@ -17,7 +17,7 @@ require_once './libraries/Table.class.php';
 
 if (empty($is_db)) {
     if (strlen($db)) {
-        $is_db = @PMA_DBI_select_db($db);
+        $is_db = PMA_DBI_select_db($db);
     } else {
         $is_db = false;
     }
@@ -53,7 +53,7 @@ if (empty($is_table) && !defined('PMA_SUBMIT_MULT')) {
             $_result = PMA_DBI_try_query(
                 'SHOW TABLES LIKE \'' . PMA_sqlAddslashes($table, true) . '\';',
                 null, PMA_DBI_QUERY_STORE);
-            $is_table = @PMA_DBI_num_rows($_result);
+            $is_table = PMA_DBI_num_rows($_result);
             PMA_DBI_free_result($_result);
         }
     } else {
@@ -73,7 +73,7 @@ if (empty($is_table) && !defined('PMA_SUBMIT_MULT')) {
                 $_result = PMA_DBI_try_query(
                     'SELECT COUNT(*) FROM ' . PMA_backquote($table) . ';',
                     null, PMA_DBI_QUERY_STORE);
-                $is_table = ($_result && @PMA_DBI_num_rows($_result));
+                $is_table = ($_result && PMA_DBI_num_rows($_result));
                 PMA_DBI_free_result($_result);
             }
 

@@ -129,7 +129,7 @@ function get_script_contr()
     $con["C_NAME"] = array();
     $i = 0;
     $alltab_rs  = PMA_DBI_query('SHOW TABLES FROM ' . PMA_backquote($GLOBALS['db']), NULL, PMA_DBI_QUERY_STORE);
-    while ($val = @PMA_DBI_fetch_row($alltab_rs)) {
+    while ($val = PMA_DBI_fetch_row($alltab_rs)) {
         $row = PMA_getForeigners($GLOBALS['db'], $val[0], '', 'internal');
         //echo "<br> internal ".$GLOBALS['db']." - ".$val[0]." - ";
         //print_r($row);

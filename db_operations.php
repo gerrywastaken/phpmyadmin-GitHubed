@@ -608,7 +608,7 @@ if ($cfgRelation['pdfwork'] && $num_tables > 0) { ?>
         <label for="pdf_page_number_opt"><?php echo $strPageNumber; ?></label>
         <select name="pdf_page_number" id="pdf_page_number_opt">
         <?php
-        while ($pages = @PMA_DBI_fetch_assoc($test_rs)) {
+        while ($pages = PMA_DBI_fetch_assoc($test_rs)) {
             echo '                <option value="' . $pages['page_nr'] . '">'
                 . $pages['page_nr'] . ': ' . $pages['page_descr'] . '</option>' . "\n";
         } // end while

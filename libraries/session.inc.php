@@ -17,7 +17,7 @@ if (! defined('PHPMYADMIN')) {
 
 // verify if PHP supports session, die if it does not
 
-if (!@function_exists('session_name')) {
+if (!function_exists('session_name')) {
     PMA_fatalError('strCantLoad', 'session');
 } elseif (ini_get('session.auto_start') == true && session_name() != 'phpMyAdmin') {
     // Do not delete the existing session, it might be used by other
@@ -33,25 +33,25 @@ if (!@function_exists('session_name')) {
 session_set_cookie_params(0, PMA_Config::getCookiePath() . '; HttpOnly',
     '', PMA_Config::isHttps());
 
-// cookies are safer (use @ini_set() in case this function is disabled)
-@ini_set('session.use_cookies', true);
+// cookies are safer. @todo add check to make sure ini_set is enabled
+ini_set('session.use_cookies', true);
 
 // but not all user allow cookies
-@ini_set('session.use_only_cookies', false);
-@ini_set('session.use_trans_sid', true);
-@ini_set('url_rewriter.tags',
+ini_set('session.use_only_cookies', false);
+ini_set('session.use_trans_sid', true);
+ini_set('url_rewriter.tags',
     'a=href,frame=src,input=src,form=fakeentry,fieldset=');
 //ini_set('arg_separator.output', '&amp;');
 
 // delete session/cookies when browser is closed
-@ini_set('session.cookie_lifetime', 0);
+ini_set('session.cookie_lifetime', 0);
 
 // warn but dont work with bug
-@ini_set('session.bug_compat_42', false);
-@ini_set('session.bug_compat_warn', true);
+ini_set('session.bug_compat_42', false);
+ini_set('session.bug_compat_warn', true);
 
 // use more secure session ids
-@ini_set('session.hash_function', 1);
+ini_set('session.hash_function', 1);
 
 // some pages (e.g. stylesheet) may be cached on clients, but not in shared
 // proxy servers
@@ -65,7 +65,7 @@ session_cache_limiter('private');
 //ini_set('session.save_handler', 'files');
 
 $session_name = 'phpMyAdmin';
-@session_name($session_name);
+session_name($session_name);
 
 if (! isset($_COOKIE[$session_name])) {
     // on first start of session we check for errors
@@ -78,7 +78,7 @@ if (! isset($_COOKIE[$session_name])) {
     }
     unset($orig_error_count);
 } else {
-    @session_start();
+    session_start();
 }
 
 /**

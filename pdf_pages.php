@@ -243,7 +243,7 @@ if ($cfgRelation['pdfwork']) {
     // We will need an array of all tables in this db
     $selectboxall = array('--');
     $alltab_rs    = PMA_DBI_query('SHOW TABLES FROM ' . PMA_backquote($db) . ';', null, PMA_DBI_QUERY_STORE);
-    while ($val = @PMA_DBI_fetch_row($alltab_rs)) {
+    while ($val = PMA_DBI_fetch_row($alltab_rs)) {
         $selectboxall[] = $val[0];
     }
 
@@ -327,7 +327,7 @@ $array_sh_page = array();
 $draginit = '';
 $reset_draginit = '';
 $i = 0;
-while ($temp_sh_page = @PMA_DBI_fetch_assoc($page_rs)) {
+while ($temp_sh_page = PMA_DBI_fetch_assoc($page_rs)) {
     $array_sh_page[] = $temp_sh_page;
 }
 

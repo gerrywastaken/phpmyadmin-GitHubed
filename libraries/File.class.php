@@ -1018,30 +1018,30 @@ class PMA_File
     function open()
     {
         if (! $this->_decompress) {
-            $this->_handle = @fopen($this->getName(), 'r');
+            $this->_handle = fopen($this->getName(), 'r');
         }
 
         switch ($this->getCompression()) {
             case false:
                 return false;
             case 'application/bzip2':
-                if ($GLOBALS['cfg']['BZipDump'] && @function_exists('bzopen')) {
-                    $this->_handle = @bzopen($this->getName(), 'r');
+                if ($GLOBALS['cfg']['BZipDump'] && function_exists('bzopen')) {
+                    $this->_handle = bzopen($this->getName(), 'r');
                 } else {
                     $this->_error_message = sprintf($GLOBALS['strUnsupportedCompressionDetected'], $this->getCompression());
                     return false;
                 }
                 break;
             case 'application/gzip':
-                if ($GLOBALS['cfg']['GZipDump'] && @function_exists('gzopen')) {
-                    $this->_handle = @gzopen($this->getName(), 'r');
+                if ($GLOBALS['cfg']['GZipDump'] && function_exists('gzopen')) {
+                    $this->_handle = gzopen($this->getName(), 'r');
                 } else {
                     $this->_error_message = sprintf($GLOBALS['strUnsupportedCompressionDetected'], $this->getCompression());
                     return false;
                 }
                 break;
             case 'application/zip':
-                if ($GLOBALS['cfg']['ZipDump'] && @function_exists('zip_open')) {
+                if ($GLOBALS['cfg']['ZipDump'] && function_exists('zip_open')) {
                     include_once './libraries/zip_extension.lib.php';
                     $result = PMA_getZipContents($this->getName());
                     if (! empty($result['error'])) {
@@ -1057,7 +1057,7 @@ class PMA_File
                 }
                 break;
             case 'none':
-                $this->_handle = @fopen($this->getName(), 'r');
+                $this->_handle = fopen($this->getName(), 'r');
                 break;
             default:
                 $this->_error_message = sprintf($GLOBALS['strUnsupportedCompressionDetected'], $this->getCompression());
@@ -1165,7 +1165,7 @@ class PMA_File
 
         echo $size . ' - ';
         echo strlen($result) . ' - ';
-        echo (@$GLOBALS['__len__'] += strlen($result)) . ' - ';
+        echo ($GLOBALS['__len__'] += strlen($result)) . ' - ';
         echo $this->_error_message;
         echo '<hr />';
 

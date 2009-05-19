@@ -50,7 +50,7 @@ function PMA_checkTimeout()
  */
 function PMA_detectCompression($filepath)
 {
-    $file = @fopen($filepath, 'rb');
+    $file = fopen($filepath, 'rb');
     if (!$file) {
         return FALSE;
     }
@@ -138,8 +138,8 @@ function PMA_importRunQuery($sql = '', $full = '', $controluser = false)
                                 return;
                             }
                         } elseif ($cfg['VerboseMultiSubmit']) {
-                            $a_num_rows = (int)@PMA_DBI_num_rows($result);
-                            $a_aff_rows = (int)@PMA_DBI_affected_rows();
+                            $a_num_rows = (int)PMA_DBI_num_rows($result);
+                            $a_aff_rows = (int)PMA_DBI_affected_rows();
                             if ($a_num_rows > 0) {
                                 $msg .= $GLOBALS['strRows'] . ': ' . $a_num_rows;
                             } elseif ($a_aff_rows > 0) {

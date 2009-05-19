@@ -59,8 +59,8 @@ if (is_array($foreignData['disp_row'])) {
     }
 
     $session_max_rows = $per_page;
-    $pageNow = @floor($pos / $session_max_rows) + 1;
-    $nbTotalPage = @ceil($foreignData['the_total'] / $session_max_rows);
+    $pageNow = floor($pos / $session_max_rows) + 1;
+    $nbTotalPage = ceil($foreignData['the_total'] / $session_max_rows);
 
     if ($foreignData['the_total'] > $per_page) {
         $gotopage = PMA_pageselector(

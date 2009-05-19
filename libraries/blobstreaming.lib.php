@@ -269,7 +269,7 @@ function PMA_PluginsExist(&$plugins)
     $result = PMA_DBI_query($query);
 
     // while there are records to parse
-	while ($data = @PMA_DBI_fetch_assoc($result))
+	while ($data = PMA_DBI_fetch_assoc($result))
 	{
         // reset plugin state
         $state = TRUE;
@@ -289,7 +289,7 @@ function PMA_PluginsExist(&$plugins)
         // break if all necessary plugins are found before all records are parsed
         if ($state)
             break;
-    } // end while ($data = @PMA_DBI_fetch_assoc($result))
+    } // end while ($data = PMA_DBI_fetch_assoc($result))
 }
 
 /**
@@ -312,7 +312,7 @@ function PMA_TablesExist(&$tables, $db_name)
     $result = PMA_DBI_query($query);
 
     // while there are records to parse
-    while ($data = @PMA_DBI_fetch_assoc($result))
+    while ($data = PMA_DBI_fetch_assoc($result))
     {
         $state = TRUE;
 
@@ -328,7 +328,7 @@ function PMA_TablesExist(&$tables, $db_name)
         // break if necessary tables are found before all records are parsed
         if ($state)
             break;
-    } // end while ($data = @PMA_DBI_fetch_assoc($result))
+    } // end while ($data = PMA_DBI_fetch_assoc($result))
 }
 
 /**
@@ -348,7 +348,7 @@ function PMA_GetDatabases()
     $databases = array();
 
     // while there are records to parse
-    while ($data = @PMA_DBI_fetch_assoc($result))
+    while ($data = PMA_DBI_fetch_assoc($result))
         $databases[] = $data['Database'];
 
     // return list of databases
@@ -410,7 +410,7 @@ function PMA_BS_GetVariables()
     $BS_Variables = array();
 
     // while there are records to retrieve
-    while ($data = @PMA_DBI_fetch_assoc($result))
+    while ($data = PMA_DBI_fetch_assoc($result))
         $BS_Variables[$data['Variable_name']] = $data['Value'];
 
     // return BS variables
@@ -622,7 +622,7 @@ function PMA_BS_ReferenceExists($bs_reference, $db_name)
     $result = PMA_DBI_query($query);
 
     // if record exists
-    if ($data = @PMA_DBI_fetch_assoc($result))
+    if ($data = PMA_DBI_fetch_assoc($result))
         $referenceExists = TRUE;
 
     // return reference existance
@@ -674,7 +674,7 @@ function PMA_BS_CreateReferenceLink($bs_reference, $db_name)
     $result = PMA_DBI_query($query);
 
     // if record exists
-    if ($data = @PMA_DBI_fetch_assoc($result))
+    if ($data = PMA_DBI_fetch_assoc($result))
     {
         // determine content-type for BS repository file (original or custom)
 	$is_custom_type = false;
@@ -720,7 +720,7 @@ function PMA_BS_CreateReferenceLink($bs_reference, $db_name)
 
         // return HTML
         return $output;
-    } // end if ($data = @PMA_DBI_fetch_assoc($result))
+    } // end if ($data = PMA_DBI_fetch_assoc($result))
 
     // return on error
     return 'Error';

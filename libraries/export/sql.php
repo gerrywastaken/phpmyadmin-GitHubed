@@ -686,7 +686,7 @@ function PMA_getTableComments($db, $table, $crlf, $do_relation = false,  $do_mim
         $schema_create .= $crlf
                        . PMA_exportComment()
                        . PMA_exportComment($GLOBALS['strMIMETypesForTable']. ' ' . PMA_backquote($table, $sql_backquotes) . ':');
-        @reset($mime_map);
+        reset($mime_map);
         foreach ($mime_map AS $mime_field => $mime) {
             $schema_create .= PMA_exportComment('  ' . PMA_backquote($mime_field, $sql_backquotes))
                             . PMA_exportComment('      ' . PMA_backquote($mime['mimetype'], $sql_backquotes));

@@ -21,10 +21,10 @@ if (empty($query_url)) {
 // display Logo, depending on $GLOBALS['cfg']['LeftDisplayLogo']
 if ($GLOBALS['cfg']['LeftDisplayLogo']) {
     $logo = 'phpMyAdmin';
-    if (@file_exists($GLOBALS['pmaThemeImage'] . 'logo_left.png')) {
+    if (file_exists($GLOBALS['pmaThemeImage'] . 'logo_left.png')) {
         $logo = '<img src="' . $GLOBALS['pmaThemeImage'] . 'logo_left.png" '
             .'alt="' . $logo . '" id="imgpmalogo" />';
-    } elseif (@file_exists($GLOBALS['pmaThemeImage'] . 'pma_logo2.png')) {
+    } elseif (file_exists($GLOBALS['pmaThemeImage'] . 'pma_logo2.png')) {
         $logo = '<img src="' . $GLOBALS['pmaThemeImage'] . 'pma_logo2.png" '
             .'alt="' . $logo . '" id="imgpmalogo" />';
     }

@@ -16,21 +16,21 @@ if (isset($cfg['AllowAnywhereRecoding'])
     && $cfg['AllowAnywhereRecoding']) {
 
     if ($cfg['RecodingEngine'] == 'recode') {
-        if (!@extension_loaded('recode')) {
+        if (!extension_loaded('recode')) {
             echo $strCantLoadRecodeIconv;
             exit;
         }
         $PMA_recoding_engine             = 'recode';
     } elseif ($cfg['RecodingEngine'] == 'iconv') {
-        if (!@extension_loaded('iconv')) {
+        if (!extension_loaded('iconv')) {
             echo $strCantLoadRecodeIconv;
             exit;
         }
         $PMA_recoding_engine             = 'iconv';
     } else {
-        if (@extension_loaded('iconv')) {
+        if (extension_loaded('iconv')) {
             $PMA_recoding_engine         = 'iconv';
-        } elseif (@extension_loaded('recode')) {
+        } elseif (extension_loaded('recode')) {
             $PMA_recoding_engine         = 'recode';
         } else {
             echo $strCantLoadRecodeIconv;
@@ -57,13 +57,13 @@ if (isset($cfg['AllowAnywhereRecoding'])
         $PMA_recoding_engine = $cfg['RecodingEngine'];
     }
     if ($PMA_recoding_engine == 'iconv') {
-        if (@function_exists('iconv')) {
-            if ((@stristr(PHP_OS, 'AIX')) && (@strcasecmp(ICONV_IMPL, 'unknown') == 0) && (@strcasecmp(ICONV_VERSION, 'unknown') == 0)) {
+        if (function_exists('iconv')) {
+            if ((stristr(PHP_OS, 'AIX')) && (strcasecmp(ICONV_IMPL, 'unknown') == 0) && (strcasecmp(ICONV_VERSION, 'unknown') == 0)) {
                 $PMA_recoding_engine = PMA_CHARSET_ICONV_AIX;
             } else {
                 $PMA_recoding_engine = PMA_CHARSET_ICONV;
             }
-        } elseif (@function_exists('libiconv')) {
+        } elseif (function_exists('libiconv')) {
             $PMA_recoding_engine = PMA_CHARSET_LIBICONV;
         } else {
             $PMA_recoding_engine = PMA_CHARSET_NONE;
@@ -76,7 +76,7 @@ if (isset($cfg['AllowAnywhereRecoding'])
             exit();
         }
     } elseif ($PMA_recoding_engine == 'recode') {
-        if (@function_exists('recode_string')) {
+        if (function_exists('recode_string')) {
             $PMA_recoding_engine = PMA_CHARSET_RECODE;
         } else {
             $PMA_recoding_engine = PMA_CHARSET_NONE;
@@ -87,15 +87,15 @@ if (isset($cfg['AllowAnywhereRecoding'])
             exit;
         }
     } else {
-        if (@function_exists('iconv')) {
-            if ((@stristr(PHP_OS, 'AIX')) && (@strcasecmp(ICONV_IMPL, 'unknown') == 0) && (@strcasecmp(ICONV_VERSION, 'unknown') == 0)) {
+        if (function_exists('iconv')) {
+            if ((stristr(PHP_OS, 'AIX')) && (strcasecmp(ICONV_IMPL, 'unknown') == 0) && (strcasecmp(ICONV_VERSION, 'unknown') == 0)) {
                 $PMA_recoding_engine = PMA_CHARSET_ICONV_AIX;
             } else {
                 $PMA_recoding_engine = PMA_CHARSET_ICONV;
             }
-        } elseif (@function_exists('libiconv')) {
+        } elseif (function_exists('libiconv')) {
             $PMA_recoding_engine = PMA_CHARSET_LIBICONV;
-        } elseif (@function_exists('recode_string')) {
+        } elseif (function_exists('recode_string')) {
             $PMA_recoding_engine = PMA_CHARSET_RECODE;
         } else {
             $PMA_recoding_engine = PMA_CHARSET_NONE;

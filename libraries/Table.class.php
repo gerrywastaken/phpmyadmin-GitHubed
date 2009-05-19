@@ -540,7 +540,7 @@ class PMA_Table
             $table_copy_rs    = PMA_query_as_cu($table_copy_query, true,
                 PMA_DBI_QUERY_STORE);
 
-            while ($table_copy_row = @PMA_DBI_fetch_assoc($table_copy_rs)) {
+            while ($table_copy_row = PMA_DBI_fetch_assoc($table_copy_rs)) {
                 $value_parts = array();
                 foreach ($table_copy_row as $_key => $_val) {
                     if (isset($row_fields[$_key]) && $row_fields[$_key] == 'cc') {
@@ -695,7 +695,7 @@ class PMA_Table
                 $maintain_relations = true;
             }
 
-            @PMA_DBI_query($sql_structure);
+            PMA_DBI_query($sql_structure);
             $GLOBALS['sql_query'] .= "\n" . $sql_structure . ';';
 
             if (($move || isset($GLOBALS['add_constraints']))

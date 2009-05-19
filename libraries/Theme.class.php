@@ -87,7 +87,7 @@ class PMA_Theme {
             return true;
         }
 
-        @include $this->getPath() . '/info.inc.php';
+        include $this->getPath() . '/info.inc.php';
 
         // was it set correctly?
         if (! isset($theme_name)) {
@@ -372,7 +372,7 @@ class PMA_Theme {
             .PMA_generate_common_url(array('set_theme' => $this->getId())) . '"'
             .' onclick="takeThis(\'' . addslashes($this->getId()) . '\');'
             .' return false;">';
-        if (@file_exists($this->getPath() . '/screen.png')) {
+        if (file_exists($this->getPath() . '/screen.png')) {
             // if screen exists then output
 
             echo '<img src="' . $this->getPath() . '/screen.png" border="1"'

@@ -294,7 +294,7 @@ function Swekey_HttpGet($url, &$response_code)
     }
     
    	global $http_response_header;
-	$res = @file_get_contents($url);
+	$res = file_get_contents($url);
 	$response_code = substr($http_response_header[0], 9, 3); //HTTP/1.0
 	if ($response_code == 200)
 	{
@@ -362,7 +362,7 @@ function Swekey_GetFastHalfRndToken()
 			if ($modif != false)
                 if (time() - $modif < 30)
 	            {
-	                $res = @file_get_contents($cachefile); 
+	                $res = file_get_contents($cachefile); 
 	                if (strlen($res) != 32)
 	                    $res = "";
                		else

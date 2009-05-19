@@ -195,7 +195,7 @@ if (top != self) {
 <div class="container">
 <a href="http://www.phpmyadmin.net" target="_blank" class="logo"><?php
     $logo_image = $GLOBALS['pmaThemeImage'] . 'logo_right.png';
-    if (@file_exists($logo_image)) {
+    if (file_exists($logo_image)) {
         echo '<img src="' . $logo_image . '" id="imLogo" name="imLogo" alt="phpMyAdmin" border="0" />';
     } else {
         echo '<img name="imLogo" id="imLogo" src="' . $GLOBALS['pmaThemeImage'] . 'pma_logo.png' . '" '

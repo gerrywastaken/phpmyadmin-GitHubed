@@ -88,7 +88,7 @@ if (isset($_REQUEST['nopass'])) {
 
         $sql_query        = 'SET password = ' . (($password == '') ? '\'\'' : $hashing_function . '(\'***\')');
         $local_query      = 'SET password = ' . (($password == '') ? '\'\'' : $hashing_function . '(\'' . PMA_sqlAddslashes($password) . '\')');
-        $result           = @PMA_DBI_try_query($local_query)
+        $result           = PMA_DBI_try_query($local_query)
             or PMA_mysqlDie(PMA_DBI_getError(), $sql_query, false, $err_url);
 
         // Changes password cookie if required

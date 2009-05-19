@@ -266,7 +266,7 @@ class PMA_PDF extends TCPDF {
              . ' WHERE db_name = \'' . PMA_sqlAddslashes($db) . '\''
              . ' AND page_nr = \'' . $pdf_page_number . '\'';
             $test_rs = PMA_query_as_cu($test_query);
-            $pages = @PMA_DBI_fetch_assoc($test_rs);
+            $pages = PMA_DBI_fetch_assoc($test_rs);
             $this->SetFont('', 'B', 14);
             $this->Cell(0, 6, ucfirst($pages['page_descr']), 'B', 1, 'C');
             $this->SetFont('', '');
@@ -997,7 +997,7 @@ class PMA_RT {
         if (!$tab_rs || !PMA_DBI_num_rows($tab_rs) > 0) {
             $pdf->PMA_PDF_die($GLOBALS['strPdfNoTables']);
             // die('No tables');
-        } while ($curr_table = @PMA_DBI_fetch_assoc($tab_rs)) {
+        } while ($curr_table = PMA_DBI_fetch_assoc($tab_rs)) {
             $alltables[] = PMA_sqlAddslashes($curr_table['table_name']);
             // $intable     = '\'' . implode('\', \'', $alltables) . '\'';
         }

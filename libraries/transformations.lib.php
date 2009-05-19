@@ -209,7 +209,7 @@ function PMA_setMIME($db, $table, $key, $mimetype, $transformation,
     $test_rs   = PMA_query_as_cu($test_qry, true, PMA_DBI_QUERY_STORE);
 
     if ($test_rs && PMA_DBI_num_rows($test_rs) > 0) {
-        $row = @PMA_DBI_fetch_assoc($test_rs);
+        $row = PMA_DBI_fetch_assoc($test_rs);
         PMA_DBI_free_result($test_rs);
 
         if (! $forcedelete

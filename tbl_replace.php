@@ -352,8 +352,8 @@ foreach ($query as $single_query) {
     if (! $result) {
         $error_messages[] = PMA_DBI_getError();
     } else {
-        if (@PMA_DBI_affected_rows()) {
-            $total_affected_rows += @PMA_DBI_affected_rows();
+        if (PMA_DBI_affected_rows()) {
+            $total_affected_rows += PMA_DBI_affected_rows();
         }
 
         $insert_id = PMA_DBI_insert_id();

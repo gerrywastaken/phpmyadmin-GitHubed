@@ -31,7 +31,7 @@ function PMA_query_as_cu($sql, $show_error = true, $options = 0)
     if ($show_error) {
         $result = PMA_DBI_query($sql, $GLOBALS['controllink'], $options);
     } else {
-        $result = @PMA_DBI_try_query($sql, $GLOBALS['controllink'], $options);
+        $result = PMA_DBI_try_query($sql, $GLOBALS['controllink'], $options);
     } // end if... else...
 
     if ($result) {
@@ -246,7 +246,7 @@ function PMA__getRelationsParam()
         return $cfgRelation;
     }
 
-    while ($curr_table = @PMA_DBI_fetch_row($tab_rs)) {
+    while ($curr_table = PMA_DBI_fetch_row($tab_rs)) {
         if ($curr_table[0] == $GLOBALS['cfg']['Server']['bookmarktable']) {
             $cfgRelation['bookmark']        = $curr_table[0];
         } elseif ($curr_table[0] == $GLOBALS['cfg']['Server']['relation']) {
@@ -288,7 +288,7 @@ function PMA__getRelationsParam()
             $mime_field_mimetype                = false;
             $mime_field_transformation          = false;
             $mime_field_transformation_options  = false;
-            while ($curr_mime_field = @PMA_DBI_fetch_row($mime_rs)) {
+            while ($curr_mime_field = PMA_DBI_fetch_row($mime_rs)) {
                 if ($curr_mime_field[0] == 'mimetype') {
                     $mime_field_mimetype               = true;
                 } elseif ($curr_mime_field[0] == 'transformation') {
@@ -1010,7 +1010,7 @@ function PMA_getForeignData($foreigners, $field, $override_total, $foreign_filte
                 $res = PMA_DBI_query('SELECT COUNT(*)' . $f_query_from . $f_query_filter);
                 if ($res) {
                     $the_total = PMA_DBI_fetch_value($res);
-                    @PMA_DBI_free_result($res);
+                    PMA_DBI_free_result($res);
                 } else {
                     $the_total = 0;
                 }
@@ -1023,10 +1023,10 @@ function PMA_getForeignData($foreigners, $field, $override_total, $foreign_filte
                 // PHP array. Usually those resultsets are not that big, so a performance hit should
                 // not be expected.
                 $disp_row = array();
-                while ($single_disp_row = @PMA_DBI_fetch_assoc($disp)) {
+                while ($single_disp_row = PMA_DBI_fetch_assoc($disp)) {
                     $disp_row[] = $single_disp_row;
                 }
-                @PMA_DBI_free_result($disp);
+                PMA_DBI_free_result($disp);
             }
         } else {
             $disp_row = null;
@@ -1075,7 +1075,7 @@ function PMA_getRelatives($from)
                . '   AND ' . $to   . '_db = \'' . PMA_sqlAddslashes($GLOBALS['db']) . '\''
                . '   AND ' . $from . '_table IN ' . $in_know
                . '   AND ' . $to   . '_table IN ' . $in_left;
-    $relations = @PMA_DBI_query($rel_query, $GLOBALS['controllink']);
+    $relations = PMA_DBI_query($rel_query, $GLOBALS['controllink']);
     while ($row = PMA_DBI_fetch_assoc($relations)) {
         $found_table                = $row[$to . '_table'];
         if (isset($tab_left[$found_table])) {

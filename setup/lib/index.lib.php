@@ -105,7 +105,7 @@ function PMA_version_check()
     $context = stream_context_create(array(
         'http' => array(
             'timeout' => $connection_timeout)));
-    $data = @file_get_contents($url, null, $context);
+    $data = file_get_contents($url, null, $context);
     if ($data === false) {
         if (function_exists('curl_init')) {
             $ch = curl_init($url);
@@ -384,7 +384,7 @@ function perform_config_checks()
     // requires zlib functions
     //
     if ($cf->getValue('GZipDump')
-        && (@!function_exists('gzopen') || @!function_exists('gzencode'))) {
+        && (!function_exists('gzopen') || !function_exists('gzencode'))) {
         messages_set('warning', 'GZipDump', 'GZipDump_name',
             PMA_lang('GZipDumpWarning', 'gzencode'));
     }
@@ -394,11 +394,11 @@ function perform_config_checks()
     // requires bzip2 functions
     //
     if ($cf->getValue('BZipDump')
-        && (!@function_exists('bzopen') || !@function_exists('bzcompress'))) {
-        $functions = @function_exists('bzopen')
+        && (!function_exists('bzopen') || !function_exists('bzcompress'))) {
+        $functions = function_exists('bzopen')
             ? '' :
             'bzopen';
-        $functions .= @function_exists('bzcompress')
+        $functions .= function_exists('bzcompress')
             ? ''
             : ($functions ? ', ' : '') . 'bzcompress';
         messages_set('warning', 'BZipDump', 'BZipDump_name',
@@ -409,7 +409,7 @@ function perform_config_checks()
     // $cfg['ZipDump']
     // requires zip_open in import
     //
-    if ($cf->getValue('ZipDump') && !@function_exists('zip_open')) {
+    if ($cf->getValue('ZipDump') && !function_exists('zip_open')) {
         messages_set('warning', 'ZipDump_import', 'ZipDump_name',
             PMA_lang('ZipDumpImportWarning', 'zip_open'));
     }
@@ -418,7 +418,7 @@ function perform_config_checks()
     // $cfg['ZipDump']
     // requires gzcompress in export
     //
-    if ($cf->getValue('ZipDump') && !@function_exists('gzcompress')) {
+    if ($cf->getValue('ZipDump') && !function_exists('gzcompress')) {
         messages_set('warning', 'ZipDump_export', 'ZipDump_name',
             PMA_lang('ZipDumpExportWarning', 'gzcompress'));
     }

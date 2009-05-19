@@ -16,19 +16,19 @@
  */
 function PMA_getDirContent($dir, $expression = '')
 {
-    if (file_exists($dir) && $handle = @opendir($dir)) {
+    if (file_exists($dir) && $handle = opendir($dir)) {
         $result = array();
         if (substr($dir, -1) != '/') {
             $dir .= '/';
         }
-        while ($file = @readdir($handle)) {
+        while ($file = readdir($handle)) {
         // for PHP < 5.2.4, is_file() gives a warning when using open_basedir
         // and verifying '..' or '.' 
             if ('.' != $file && '..' != $file && is_file($dir . $file) && ($expression == '' || preg_match($expression, $file))) {
                 $result[] = $file;
             }
         }
-        @closedir($handle);
+        closedir($handle);
         asort($result);
         return $result;
     } else {
@@ -72,19 +72,19 @@ function PMA_supportedDecompressions()
 
     $compressions = '';
 
-    if ($cfg['GZipDump'] && @function_exists('gzopen')) {
+    if ($cfg['GZipDump'] && function_exists('gzopen')) {
         if (!empty($compressions)) {
             $compressions .= '|';
         }
         $compressions .= 'gz';
     }
-    if ($cfg['BZipDump'] && @function_exists('bzopen')) {
+    if ($cfg['BZipDump'] && function_exists('bzopen')) {
         if (!empty($compressions)) {
             $compressions .= '|';
         }
         $compressions .= 'bz2';
     }
-    if ($cfg['ZipDump'] && @function_exists('gzinflate')) {
+    if ($cfg['ZipDump'] && function_exists('gzinflate')) {
         if (!empty($compressions)) {
             $compressions .= '|';
         }

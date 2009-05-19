@@ -62,12 +62,12 @@ if (version_compare(phpversion(), '6', 'lt')) {
     /**
      * Avoid object cloning errors
      */
-    @ini_set('zend.ze1_compatibility_mode', false);
+    ini_set('zend.ze1_compatibility_mode', false);
 
     /**
      * Avoid problems with magic_quotes_runtime
      */
-    @ini_set('magic_quotes_runtime', false);
+    ini_set('magic_quotes_runtime', false);
 }
 
 /**
@@ -278,7 +278,7 @@ if (empty($__redirect) && !defined('PMA_NO_VARIABLES_IMPORT')) {
  *
  * @todo need to decide how we should handle this (without @)
  */
-date_default_timezone_set(@date_default_timezone_get());
+date_default_timezone_set(date_default_timezone_get());
 
 /**
  * include session handling after the globals, to prevent overwriting
@@ -716,7 +716,7 @@ $GLOBALS['pmaThemeImage']   = $_SESSION['PMA_Theme']->getImgPath();
 /**
  * load layout file if exists
  */
-if (@file_exists($_SESSION['PMA_Theme']->getLayoutFile())) {
+if (file_exists($_SESSION['PMA_Theme']->getLayoutFile())) {
     include $_SESSION['PMA_Theme']->getLayoutFile();
     /**
      * @todo remove if all themes are update use Navi instead of Left as frame name

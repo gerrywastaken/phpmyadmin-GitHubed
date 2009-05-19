@@ -130,14 +130,14 @@ function test_db_connection($extension, $connect_type, $host, $port, $socket, $u
     $port = empty($port) || $connect_type == 'socket' ? null : ':' . $port;
     $error = null;
     if ($extension == 'mysql') {
-        $conn = @mysql_connect($host . $socket . $port, $user, $pass);
+        $conn = mysql_connect($host . $socket . $port, $user, $pass);
         if (!$conn) {
             $error = PMA_lang('error_connection');
         } else {
             mysql_close($conn);
         }
     } else {
-        $conn = @mysqli_connect($host, $user, $pass, null, $port, $socket);
+        $conn = mysqli_connect($host, $user, $pass, null, $port, $socket);
         if (!$conn) {
             $error = PMA_lang('error_connection');
         } else {

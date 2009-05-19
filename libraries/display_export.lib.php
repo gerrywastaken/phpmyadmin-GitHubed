@@ -224,9 +224,9 @@ echo PMA_pluginGetJavascript($export_list);
 
 <?php
 // zip, gzip and bzip2 encode features
-$is_zip  = ($cfg['ZipDump']  && @function_exists('gzcompress'));
-$is_gzip = ($cfg['GZipDump'] && @function_exists('gzencode'));
-$is_bzip = ($cfg['BZipDump'] && @function_exists('bzcompress'));
+$is_zip  = ($cfg['ZipDump']  && function_exists('gzcompress'));
+$is_gzip = ($cfg['GZipDump'] && function_exists('gzencode'));
+$is_bzip = ($cfg['BZipDump'] && function_exists('bzcompress'));
 
 if ($is_zip || $is_gzip || $is_bzip) { ?>
     <div class="formelementrow">

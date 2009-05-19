@@ -17,7 +17,7 @@ if ($GLOBALS['cfg']['DBG']['php']) {
     /**
      * Loads the DBG extension if needed
      */
-    if (! @extension_loaded('dbg') ) {
+    if (!extension_loaded('dbg') ) {
         $message = PMA_Message::error('strCantLoad');
         $message->addParam('DBG');
         $message->addMessage('<a href="./Documentation.html#faqdbg" target="documentation">', false);

@@ -336,7 +336,7 @@ onsubmit="return (checkFormElementInRange(this, 'session_max_rows', '<?php echo 
         onsubmit="return <?php echo (($_SESSION['userconf']['pos'] + $_SESSION['userconf']['max_rows'] < $unlim_num_rows && $num_rows >= $_SESSION['userconf']['max_rows']) ? 'true' : 'false'); ?>">
         <?php echo PMA_generate_common_hidden_inputs($db, $table); ?>
         <input type="hidden" name="sql_query" value="<?php echo $html_sql_query; ?>" />
-        <input type="hidden" name="pos" value="<?php echo @((ceil($unlim_num_rows / $_SESSION['userconf']['max_rows'])- 1) * $_SESSION['userconf']['max_rows']); ?>" />
+        <input type="hidden" name="pos" value="<?php echo ((ceil($unlim_num_rows / $_SESSION['userconf']['max_rows'])- 1) * $_SESSION['userconf']['max_rows']); ?>" />
         <?php
         if ($is_innodb && $unlim_num_rows > $GLOBALS['cfg']['MaxExactCount']) {
             echo '<input type="hidden" name="find_real_end" value="1" />' . "\n";
@@ -355,8 +355,8 @@ onsubmit="return (checkFormElementInRange(this, 'session_max_rows', '<?php echo 
     //page redirection
     // (unless we are showing all records)
     if ('all' != $_SESSION['userconf']['max_rows']) { //if1
-        $pageNow = @floor($_SESSION['userconf']['pos'] / $_SESSION['userconf']['max_rows']) + 1;
-        $nbTotalPage = @ceil($unlim_num_rows / $_SESSION['userconf']['max_rows']);
+        $pageNow = floor($_SESSION['userconf']['pos'] / $_SESSION['userconf']['max_rows']) + 1;
+        $nbTotalPage = ceil($unlim_num_rows / $_SESSION['userconf']['max_rows']);
 
         if ($nbTotalPage > 1){ //if2
        ?>
@@ -2257,7 +2257,7 @@ function PMA_prepare_row_data($mouse_events, $class, $condition_field, $analyzed
             } else {
                 $dispval = $GLOBALS['strLinkNotFound'];
             }
-            @PMA_DBI_free_result($dispresult);
+            PMA_DBI_free_result($dispresult);
         } else {
             $dispval     = '';
         } // end if... else...

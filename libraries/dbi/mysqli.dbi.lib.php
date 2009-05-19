@@ -82,11 +82,11 @@ function PMA_DBI_connect($user, $password, $is_controluser = false)
         $client_flags |= MYSQLI_CLIENT_SSL;
     }
 
-    $return_value = @mysqli_real_connect($link, $GLOBALS['cfg']['Server']['host'], $user, $password, false, $server_port, $server_socket, $client_flags);
+    $return_value = mysqli_real_connect($link, $GLOBALS['cfg']['Server']['host'], $user, $password, false, $server_port, $server_socket, $client_flags);
 
     // Retry with empty password if we're allowed to
     if ($return_value == false && isset($cfg['Server']['nopassword']) && $cfg['Server']['nopassword'] && !$is_controluser) {
-        $return_value = @mysqli_real_connect($link, $GLOBALS['cfg']['Server']['host'], $user, '', false, $server_port, $server_socket, $client_flags);
+        $return_value = mysqli_real_connect($link, $GLOBALS['cfg']['Server']['host'], $user, '', false, $server_port, $server_socket, $client_flags);
     }
 
     if ($return_value == false) {
@@ -380,7 +380,7 @@ function PMA_DBI_num_rows($result)
 {
     // see the note for PMA_DBI_try_query();
     if (!is_bool($result)) {
-        return @mysqli_num_rows($result);
+        return mysqli_num_rows($result);
     } else {
         return 0;
     }

@@ -106,7 +106,7 @@ if (strlen($db)) {
 
 @set_time_limit($cfg['ExecTimeLimit']);
 if (!empty($cfg['MemoryLimit'])) {
-    @ini_set('memory_limit', $cfg['MemoryLimit']);
+    ini_set('memory_limit', $cfg['MemoryLimit']);
 }
 
 $timestamp = time();
@@ -194,7 +194,7 @@ if (!empty($bkm_label) && !empty($import_text)) {
 } // end store bookmarks
 
 // We can not read all at once, otherwise we can run out of memory
-$memory_limit = trim(@ini_get('memory_limit'));
+$memory_limit = trim(ini_get('memory_limit'));
 // 2 MB as default
 if (empty($memory_limit)) {
     $memory_limit = 2 * 1024 * 1024;
@@ -231,7 +231,7 @@ if (!empty($local_import_file) && !empty($cfg['UploadDir'])) {
 // Do we have file to import?
 if ($import_file != 'none' && !$error) {
     // work around open_basedir and other limitations
-    $open_basedir = @ini_get('open_basedir');
+    $open_basedir = ini_get('open_basedir');
 
     // If we are on a server with open_basedir, we must move the file
     // before opening it. The doc explains how to create the "./tmp"
@@ -261,8 +261,8 @@ if ($import_file != 'none' && !$error) {
     } else {
         switch ($compression) {
             case 'application/bzip2':
-                if ($cfg['BZipDump'] && @function_exists('bzopen')) {
-                    $import_handle = @bzopen($import_file, 'r');
+                if ($cfg['BZipDump'] && function_exists('bzopen')) {
+                    $import_handle = bzopen($import_file, 'r');
                 } else {
                     $message = PMA_Message::error('strUnsupportedCompressionDetected');
                     $message->addParam($compression);
@@ -270,8 +270,8 @@ if ($import_file != 'none' && !$error) {
                 }
                 break;
             case 'application/gzip':
-                if ($cfg['GZipDump'] && @function_exists('gzopen')) {
-                    $import_handle = @gzopen($import_file, 'r');
+                if ($cfg['GZipDump'] && function_exists('gzopen')) {
+                    $import_handle = gzopen($import_file, 'r');
                 } else {
                     $message = PMA_Message::error('strUnsupportedCompressionDetected');
                     $message->addParam($compression);
@@ -279,7 +279,7 @@ if ($import_file != 'none' && !$error) {
                 }
                 break;
             case 'application/zip':
-                if ($cfg['ZipDump'] && @function_exists('zip_open')) {
+                if ($cfg['ZipDump'] && function_exists('zip_open')) {
                     include_once './libraries/zip_extension.lib.php';
                     $result = PMA_getZipContents($import_file);
                     if (! empty($result['error'])) {
@@ -295,7 +295,7 @@ if ($import_file != 'none' && !$error) {
                 }
                 break;
             case 'none':
-                $import_handle = @fopen($import_file, 'r');
+                $import_handle = fopen($import_file, 'r');
                 break;
             default:
                 $message = PMA_Message::error('strUnsupportedCompressionDetected');

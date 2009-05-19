@@ -273,7 +273,7 @@ if ($server != 0
  * Nijel: As we try to handle charsets by ourself, mbstring overloads just
  * break it, see bug 1063821.
  */
-if (@extension_loaded('mbstring') && @ini_get('mbstring.func_overload') > 1) {
+if (extension_loaded('mbstring') && ini_get('mbstring.func_overload') > 1) {
     trigger_error($strMbOverloadWarning, E_USER_WARNING);
 }
 
@@ -281,7 +281,7 @@ if (@extension_loaded('mbstring') && @ini_get('mbstring.func_overload') > 1) {
  * Nijel: mbstring is used for handling multibyte inside parser, so it is good
  * to tell user something might be broken without it, see bug #1063149.
  */
-if (! @extension_loaded('mbstring')) {
+if (!extension_loaded('mbstring')) {
     trigger_error($strMbExtensionMissing, E_USER_WARNING);
 }
 
@@ -314,7 +314,7 @@ if (function_exists('PMA_DBI_get_client_info')) {
 /**
  * Warning about Suhosin
  */
-if ($cfg['SuhosinDisableWarning'] == false && @ini_get('suhosin.request.max_value_length')) {
+if ($cfg['SuhosinDisableWarning'] == false && ini_get('suhosin.request.max_value_length')) {
     trigger_error(PMA_sanitize(sprintf($strSuhosin, '[a@./Documentation.html#faq1_38@_blank]', '[/a]')), E_USER_WARNING);
     }
 

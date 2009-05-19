@@ -112,7 +112,7 @@ class PMA_Config
     {
         // If zlib output compression is set in the php configuration file, no
         // output buffering should be run
-        if (@ini_get('zlib.output_compression')) {
+        if (ini_get('zlib.output_compression')) {
             $this->set('OBGzip', false);
         }
 
@@ -199,10 +199,10 @@ class PMA_Config
         } elseif ($this->get('GD2Available') == 'no') {
             $this->set('PMA_IS_GD2', 0);
         } else {
-            if (!@function_exists('imagecreatetruecolor')) {
+            if (!function_exists('imagecreatetruecolor')) {
                 $this->set('PMA_IS_GD2', 0);
             } else {
-                if (@function_exists('gd_info')) {
+                if (function_exists('gd_info')) {
                     $gd_nfo = gd_info();
                     if (strstr($gd_nfo["GD Version"], '2.')) {
                         $this->set('PMA_IS_GD2', 1);
@@ -488,7 +488,7 @@ class PMA_Config
     {
         // Check for permissions (on platforms that support it):
         if ($this->get('CheckConfigurationPermissions')) {
-            $perms = @fileperms($this->getSource());
+            $perms = fileperms($this->getSource());
             if (!($perms === false) && ($perms & 2)) {
                 // This check is normally done after loading configuration
                 $this->checkWebServerOs();
@@ -573,7 +573,7 @@ class PMA_Config
              * REQUEST_URI contains PATH_INFO too, this is not what we want
              * script-php/pathinfo/
             if (PMA_getenv('REQUEST_URI')) {
-                $url = @parse_url(PMA_getenv('REQUEST_URI')); // produces E_WARNING if it cannot get parsed, e.g. '/foobar:/'
+                $url = parse_url(PMA_getenv('REQUEST_URI')); // produces E_WARNING if it cannot get parsed, e.g. '/foobar:/'
                 if ($url === false) {
                     $url = array('path' => $_SERVER['REQUEST_URI']);
                 }
@@ -811,7 +811,7 @@ class PMA_Config
 
         // At first we try to parse REQUEST_URI, it might contain full URL,
         if (PMA_getenv('REQUEST_URI')) {
-            $url = @parse_url(PMA_getenv('REQUEST_URI')); // produces E_WARNING if it cannot get parsed, e.g. '/foobar:/'
+            $url = parse_url(PMA_getenv('REQUEST_URI')); // produces E_WARNING if it cannot get parsed, e.g. '/foobar:/'
             if($url === false) {
                 $url = array();
             }
@@ -885,7 +885,7 @@ class PMA_Config
         /**
          * REQUEST_URI contains PATH_INFO too, this is not what we want
          * script-php/pathinfo/
-        $parsed_url = @parse_url($_SERVER['REQUEST_URI']); // produces E_WARNING if it cannot get parsed, e.g. '/foobar:/'
+        $parsed_url = parse_url($_SERVER['REQUEST_URI']); // produces E_WARNING if it cannot get parsed, e.g. '/foobar:/'
         if ($parsed_url === false) {
          */
             $parsed_url = array('path' => $url);

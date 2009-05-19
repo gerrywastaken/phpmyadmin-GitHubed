@@ -99,7 +99,7 @@ require './libraries/export/' . PMA_securePath($type) . '.php';
  */
 @set_time_limit($cfg['ExecTimeLimit']);
 if (!empty($cfg['MemoryLimit'])) {
-    @ini_set('memory_limit', $cfg['MemoryLimit']);
+    ini_set('memory_limit', $cfg['MemoryLimit']);
 }
 
 // Start with empty buffer
@@ -139,16 +139,16 @@ function PMA_exportOutputHandler($line)
                     $dump_buffer = PMA_convert_string($GLOBALS['charset'], $GLOBALS['charset_of_file'], $dump_buffer);
                 }
                 // as bzipped
-                if ($GLOBALS['compression'] == 'bzip'  && @function_exists('bzcompress')) {
+                if ($GLOBALS['compression'] == 'bzip'  && function_exists('bzcompress')) {
                     $dump_buffer = bzcompress($dump_buffer);
                 }
                 // as a gzipped file
-                elseif ($GLOBALS['compression'] == 'gzip' && @function_exists('gzencode')) {
+                elseif ($GLOBALS['compression'] == 'gzip' && function_exists('gzencode')) {
                     // without the optional parameter level because it bug
                     $dump_buffer = gzencode($dump_buffer);
                 }
                 if ($GLOBALS['save_on_server']) {
-                    $write_result = @fwrite($GLOBALS['file_handle'], $dump_buffer);
+                    $write_result = fwrite($GLOBALS['file_handle'], $dump_buffer);
                     if (!$write_result || ($write_result != strlen($dump_buffer))) {
                         $GLOBALS['message'] = PMA_Message::error('strNoSpace');
                         $GLOBALS['message']->addParam($save_filename);
@@ -173,7 +173,7 @@ function PMA_exportOutputHandler($line)
                 $line = PMA_convert_string($GLOBALS['charset'], $GLOBALS['charset_of_file'], $line);
             }
             if ($GLOBALS['save_on_server'] && strlen($line) > 0) {
-                $write_result = @fwrite($GLOBALS['file_handle'], $line);
+                $write_result = fwrite($GLOBALS['file_handle'], $line);
                 if (!$write_result || ($write_result != strlen($line))) {
                     $GLOBALS['message'] = PMA_Message::error('strNoSpace');
                     $GLOBALS['message']->addParam($save_filename);
@@ -213,7 +213,7 @@ $output_charset_conversion = $asfile && $cfg['AllowAnywhereRecoding']
 // Use on the fly compression?
 $onfly_compression = $GLOBALS['cfg']['CompressOnFly'] && ($compression == 'gzip' || $compression == 'bzip');
 if ($onfly_compression) {
-    $memory_limit = trim(@ini_get('memory_limit'));
+    $memory_limit = trim(ini_get('memory_limit'));
     // 2 MB as default
     if (empty($memory_limit)) {
         $memory_limit = 2 * 1024 * 1024;
@@ -310,7 +310,7 @@ if ($save_on_server) {
             $message = PMA_Message::error('strNoPermission');
             $message->addParam($save_filename);
         } else {
-            if (!$file_handle = @fopen($save_filename, 'w')) {
+            if (!$file_handle = fopen($save_filename, 'w')) {
                 $message = PMA_Message::error('strNoPermission');
                 $message->addParam($save_filename);
             }
@@ -342,7 +342,7 @@ if (!$save_on_server) {
         // Download
         // (avoid rewriting data containing HTML with anchors and forms;
         // this was reported to happen under Plesk)
-        @ini_set('url_rewriter.tags','');
+        ini_set('url_rewriter.tags','');
 
         if (!empty($content_encoding)) {
             header('Content-Encoding: ' . $content_encoding);
@@ -590,7 +590,7 @@ if (!empty($asfile)) {
     // Do the compression
     // 1. as a zipped file
     if ($compression == 'zip') {
-        if (@function_exists('gzcompress')) {
+        if (function_exists('gzcompress')) {
             $zipfile = new zipfile();
             $zipfile -> addFile($dump_buffer, substr($filename, 0, -4));
             $dump_buffer = $zipfile -> file();
@@ -598,13 +598,13 @@ if (!empty($asfile)) {
     }
     // 2. as a bzipped file
     elseif ($compression == 'bzip') {
-        if (@function_exists('bzcompress')) {
+        if (function_exists('bzcompress')) {
             $dump_buffer = bzcompress($dump_buffer);
         }
     }
     // 3. as a gzipped file
     elseif ($compression == 'gzip') {
-        if (@function_exists('gzencode')) {
+        if (function_exists('gzencode')) {
             // without the optional parameter level because it bug
             $dump_buffer = gzencode($dump_buffer);
         }
@@ -612,7 +612,7 @@ if (!empty($asfile)) {
 
     /* If ve saved on server, we have to close file now */
     if ($save_on_server) {
-        $write_result = @fwrite($file_handle, $dump_buffer);
+        $write_result = fwrite($file_handle, $dump_buffer);
         fclose($file_handle);
         if (strlen($dump_buffer) !=0 && (!$write_result || ($write_result != strlen($dump_buffer)))) {
             $message = new PMA_Message('strNoSpace', PMA_Message::ERROR, $save_filename);

@@ -499,7 +499,7 @@ require_once './libraries/List.class.php';
         // 2. get allowed dbs from the "mysql.tables_priv" table
         $local_query = 'SELECT DISTINCT Db FROM mysql.tables_priv WHERE Table_priv LIKE \'%Select%\' AND User = \'' . PMA_sqlAddslashes($GLOBALS['cfg']['Server']['user']) . '\'';
         $rs          = PMA_DBI_try_query($local_query, $GLOBALS['controllink']);
-        if ($rs && @PMA_DBI_num_rows($rs)) {
+        if ($rs && PMA_DBI_num_rows($rs)) {
             while ($row = PMA_DBI_fetch_assoc($rs)) {
                 if (!in_array($row['Db'], $dblist)) {
                     $dblist[] = $row['Db'];

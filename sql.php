@@ -22,7 +22,7 @@ $GLOBALS['js_include'][] = 'mootools.js';
 // Security checkings
 if (! empty($goto)) {
     $is_gotofile     = preg_replace('@^([^?]+).*$@s', '\\1', $goto);
-    if (! @file_exists('./' . $is_gotofile)) {
+    if (!file_exists('./' . $is_gotofile)) {
         unset($goto);
     } else {
         $is_gotofile = ($is_gotofile == $goto);
@@ -96,7 +96,7 @@ PMA_displayTable_checkConfigParams();
  */
 if (isset($find_real_end) && $find_real_end) {
     $unlim_num_rows = PMA_Table::countRecords($db, $table, true, true);
-    $_SESSION['userconf']['pos'] = @((ceil($unlim_num_rows / $_SESSION['userconf']['max_rows']) - 1) * $_SESSION['userconf']['max_rows']);
+    $_SESSION['userconf']['pos'] = ((ceil($unlim_num_rows / $_SESSION['userconf']['max_rows']) - 1) * $_SESSION['userconf']['max_rows']);
 }
 
 
@@ -297,7 +297,7 @@ if (isset($GLOBALS['show_as_php']) || !empty($GLOBALS['validatequery'])) {
     // TODO-Item http://sourceforge.net/tracker/index.php?func=detail&aid=571934&group_id=23067&atid=377411
     $querytime_before = array_sum(explode(' ', microtime()));
 
-    $result   = @PMA_DBI_try_query($full_sql_query, null, PMA_DBI_QUERY_STORE);
+    $result   = PMA_DBI_try_query($full_sql_query, null, PMA_DBI_QUERY_STORE);
 
     $querytime_after = array_sum(explode(' ', microtime()));
 
@@ -328,9 +328,9 @@ if (isset($GLOBALS['show_as_php']) || !empty($GLOBALS['validatequery'])) {
     // mysql_affected_rows() reports about the last query done)
 
     if (!$is_affected) {
-        $num_rows = ($result) ? @PMA_DBI_num_rows($result) : 0;
+        $num_rows = ($result) ? PMA_DBI_num_rows($result) : 0;
     } elseif (!isset($num_rows)) {
-        $num_rows = @PMA_DBI_affected_rows();
+        $num_rows = PMA_DBI_affected_rows();
     }
 
     // Grabs the profiling results
